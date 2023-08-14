@@ -181,11 +181,11 @@ const GameWorld = () => {
   }, [characterPosition, aiNPCPosition]);
   return (
     <>
-      <Html>
+      {/* <Html>
         {showInteractionMenu && (
           <InteractionMenu onClose={() => setShowInteractionMenu(false)} />
         )}
-      </Html>
+      </Html> */}
 
       <PerspectiveCamera
         makeDefault
