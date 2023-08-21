@@ -1,8 +1,9 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import Layout from "~/components/newlayout/Layout";
 import Quiz from "~/components/quiz/Quiz";
 import QuizContainer from "~/components/quiz/QuizContainer";
 
-export default function indexPage({
+export default function quizPage({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
@@ -11,6 +12,10 @@ export default function indexPage({
     </QuizContainer>
   );
 }
+
+quizPage.getLayout = (page: React.ReactElement) => {
+  return <Layout>{page}</Layout>;
+};
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   return {

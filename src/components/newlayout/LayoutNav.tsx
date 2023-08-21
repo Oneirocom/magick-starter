@@ -5,21 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 const navigation = [
-  { name: "Battle", href: "#", current: true },
-  { name: "MagickDex", href: "#", current: false },
-  { name: "Graveyard", href: "#", current: false },
+  { name: "Quiz", href: "/quiz" },
+  { name: "Battle", href: "/battle" },
+  { name: "Signup for Magick", href: "magickml.com" },
 ];
 const userNavigation = [{ name: "Sign out", href: "#" }];
 
 const LayoutNav = ({}: {}) => {
   const { data: user, isLoading, error } = api.player.getCurrentUser.useQuery();
+  const router = useRouter();
 
   return (
     <Disclosure
       as="nav"
-      className="bg-gradient-to-r from-slate-800 via-slate-900 to-slate-800"
+      className="absolute top-0 w-full bg-gradient-to-r from-slate-800 via-slate-900 to-slate-800"
     >
       {({ open }) => (
         <>
@@ -42,12 +44,12 @@ const LayoutNav = ({}: {}) => {
                         key={item.name}
                         href={item.href}
                         className={clsx(
-                          item.current
+                          item.href === router.asPath
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        aria-current={item ? "page" : undefined}
                       >
                         {item.name}
                       </Link>
@@ -123,12 +125,14 @@ const LayoutNav = ({}: {}) => {
                   as="a"
                   href={item.href}
                   className={clsx(
-                    item.current
+                    item.href === router.asPath
                       ? "bg-gray-900 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
-                  aria-current={item.current ? "page" : undefined}
+                  aria-current={
+                    item.href === router.asPath ? "page" : undefined
+                  }
                 >
                   {item.name}
                 </Disclosure.Button>
