@@ -14,7 +14,7 @@ import {
 extend({ WaterPass, UnrealBloomPass, FilmPass, LUTPass });
 
 const QuizScene = () => (
-  <div className="absolute inset-0 h-screen w-full -z-10">
+  <div className="absolute inset-0 -z-10 h-screen w-full">
     <Canvas
       linear
       flat
@@ -23,7 +23,7 @@ const QuizScene = () => (
       camera={{ fov: 80, position: [0, 0, 30] }}
     >
       <ambientLight intensity={0.1} />
-      <pointLight distance={60} intensity={4} color="purple" />
+      <pointLight distance={60} intensity={4} color="blue" />
       <spotLight
         intensity={1.5}
         position={[0, 0, 2000]}
@@ -33,7 +33,7 @@ const QuizScene = () => (
       <mesh>
         <planeGeometry args={[1000, 1000]} />
         <meshStandardMaterial
-          color="#9e08a3"
+          color="#1BC5EB"
           roughness={0.5}
           depthTest={false}
         />
@@ -97,14 +97,14 @@ function Swarm({ count, dummy = new THREE.Object3D() }) {
   });
   return (
     <>
-      <pointLight ref={light} distance={40} intensity={2.5} color="purple">
+      <pointLight ref={light} distance={40} intensity={2.5} color="blue">
         <mesh scale={[1, 1, 6]}>
           <dodecahedronGeometry args={[4, 0]} />
         </mesh>
       </pointLight>
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronGeometry args={[1, 0]} />
-        <meshStandardMaterial color="#020000" roughness={0.5} />
+        <meshStandardMaterial color="#1BC5EB" roughness={0.5} />
       </instancedMesh>
     </>
   );
@@ -116,7 +116,7 @@ function Postpro() {
   useFrame((state) => (water.current.time = state.clock.elapsedTime * 4));
   return (
     <Effects disableGamma>
-      <waterPass ref={water} factor={.5} />
+      <waterPass ref={water} factor={0.5} />
       <unrealBloomPass args={[undefined, 1.25, 1, 0]} />
       <filmPass args={[0.2, 0.5, 1500, false]} />
       <lUTPass lut={data.texture} intensity={1} />

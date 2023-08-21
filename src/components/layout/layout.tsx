@@ -193,7 +193,7 @@ const Layout = (props: Props) => {
             <h1 className="text-lg font-semibold leading-6 text-gray-900">
               Username
             </h1>
-            <p className="max-w-2xl text-sm text-purple-500">Level: 1</p>
+            <p className="max-w-2xl text-sm text-secondary-highlight">Level: 1</p>
           </div>
         </header>
         <main className="h-full bg-white/40">

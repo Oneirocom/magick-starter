@@ -77,22 +77,13 @@ const Quiz: React.FC = () => {
   };
 
   const cardClasses =
-    "min-h-[320px] w-full max-w-md rounded-lg bg-black p-8 shadow-md";
+    "min-h-[320px] max-w-[300px] md:max-w-md w-full max-w-md rounded-lg bg-card-main p-8 shadow-md border-secondary-highlight border";
 
   const handleRestart = () => {
     setQuizState(0);
     setPrompt("");
     setScore(0);
     setQuizData([]);
-  };
-
-  const handleNextQuestion = () => {
-    if (currentQuestion < quizData.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setQuizState(2);
-      setCurrentQuestion(0);
-    }
   };
 
   return (
@@ -112,12 +103,12 @@ const Quiz: React.FC = () => {
               <input
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                className="mb-4 w-full rounded-md bg-purple-800/50 p-2 text-white"
+                className="mb-4 w-full rounded-md bg-secondary-highlight/50 p-2 text-white placeholder:text-white/70"
                 placeholder="Enter a topic for your quiz..."
               />
               <button
                 type="submit"
-                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-purple-600 py-2 text-white transition-all duration-300 hover:scale-105 hover:border-purple-500 hover:bg-purple-600/25 disabled:pointer-events-none disabled:opacity-50"
+                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
                 onClick={handleGetQuiz}
                 disabled={isQuizLoading || prompt.length === 0}
               >
@@ -125,7 +116,11 @@ const Quiz: React.FC = () => {
                   <span className="loading loading-spinner loading-md mr-2" />
                 )}
 
-                {isQuizLoading ? "Loading..." : "Start Quiz"}
+                {isQuizLoading
+                  ? "Loading..."
+                  : prompt.length === 0
+                  ? "Enter a topic above to start"
+                  : "Start Quiz"}
               </button>
             </form>
           </motion.div>
@@ -138,6 +133,7 @@ const Quiz: React.FC = () => {
             className={cardClasses}
           >
             <QuestionTitle title={currentQuiz?.question || "Error"} />
+            <div className="divider before:bg-secondary-highlight/80 after:bg-secondary-highlight/80" />
             {currentQuiz?.options.map((option, index) => (
               <AnswerButton
                 key={index}
@@ -150,7 +146,7 @@ const Quiz: React.FC = () => {
             ))}
             {showAnswer && (
               <button
-                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border bg-purple-600 py-2 pt-2 text-white transition-all duration-300 hover:scale-105 hover:bg-purple-400"
+                className="mb-2 mt-8 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border bg-secondary-highlight py-2 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-secondary-main"
                 onClick={handleContinue}
               >
                 Continue
@@ -172,13 +168,13 @@ const Quiz: React.FC = () => {
 
             <div className="flex flex-col items-center">
               <button
-                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-purple-600 py-2 text-white transition-all duration-300 hover:scale-105 hover:border-purple-500 hover:bg-purple-600/25 disabled:pointer-events-none disabled:opacity-50"
+                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
                 onClick={() => alert("woweeeee")}
               >
                 Continue this Quiz
               </button>
               <button
-                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-purple-600 py-2 text-white transition-all duration-300 hover:scale-105 hover:border-purple-500 hover:bg-purple-600/25 disabled:pointer-events-none disabled:opacity-50"
+                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
                 onClick={handleRestart}
               >
                 New Quiz

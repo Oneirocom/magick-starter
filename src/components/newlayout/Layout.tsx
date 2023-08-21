@@ -6,7 +6,7 @@ import LayoutNav from "./LayoutNav";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   return (
-    <div className="">
+    <div className="overflow-hidden">
       <LayoutNav />
       <div className="min-h-full overflow-hidden">
         {/* <LayoutHeader title={router.asPath.replace("/", "")} /> */}

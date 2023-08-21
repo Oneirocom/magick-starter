@@ -21,7 +21,7 @@ const LayoutNav = ({}: {}) => {
   return (
     <Disclosure
       as="nav"
-      className="absolute top-0 w-full bg-gradient-to-r from-slate-800 via-slate-900 to-slate-800"
+      className="absolute h-16 top-0 w-full bg-gradient-to-r from-card-main/70 via-card-main/50 saturate-100 to-card-main/60 border-b border-b-card-main backdrop-blur-2xl"
     >
       {({ open }) => (
         <>
@@ -30,7 +30,7 @@ const LayoutNav = ({}: {}) => {
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Image
-                    className="h-12 w-12"
+                    className="h-12  object-contain"
                     src="/images/logo.png"
                     alt="Espresso RPG"
                     width={64}
@@ -38,16 +38,16 @@ const LayoutNav = ({}: {}) => {
                   />
                 </div>
                 <div className="hidden md:block">
-                  <div className="ml-10 flex items-baseline space-x-4">
+                  <div className="ml-10 flex items-baseline space-x-8">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
                         className={clsx(
                           item.href === router.asPath
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                            ? "border-secondary-highlight text-white"
+                            : "text-gray-300 hover:border-secondary-highlight border-transparent",
+                          "rounded-md px-3 py-2 text-sm font-medium text-white border hover:border-secondary-highlight transition-all duration-150 ease-in-out"
                         )}
                         aria-current={item ? "page" : undefined}
                       >
@@ -62,7 +62,7 @@ const LayoutNav = ({}: {}) => {
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <Menu.Button className="bg-gray-800 focus:ring-offset-gray-800 relative flex max-w-xs items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
                         <img
@@ -89,7 +89,7 @@ const LayoutNav = ({}: {}) => {
                                 href={item.href}
                                 className={clsx(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  "text-gray-700 block px-4 py-2 text-sm"
                                 )}
                               >
                                 {item.name}
@@ -104,7 +104,7 @@ const LayoutNav = ({}: {}) => {
               </div>
               <div className="-mr-2 flex md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <Disclosure.Button className="bg-gray-800 text-gray-400 hover:bg-gray-700 focus:ring-offset-gray-800 relative inline-flex items-center justify-center rounded-md p-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -138,7 +138,7 @@ const LayoutNav = ({}: {}) => {
                 </Disclosure.Button>
               ))}
             </div>
-            <div className="border-t border-gray-700 pb-3 pt-4">
+            <div className="border-gray-700 border-t pb-3 pt-4">
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <img
@@ -151,7 +151,7 @@ const LayoutNav = ({}: {}) => {
                   <div className="text-base font-medium leading-none text-white">
                     {user?.name ?? ""}
                   </div>
-                  <div className="text-sm font-medium leading-none text-gray-400">
+                  <div className="text-gray-400 text-sm font-medium leading-none">
                     {user?.email ?? ""}
                   </div>
                 </div>
@@ -162,7 +162,7 @@ const LayoutNav = ({}: {}) => {
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                    className="text-gray-400 hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium hover:text-white"
                   >
                     {item.name}
                   </Disclosure.Button>
