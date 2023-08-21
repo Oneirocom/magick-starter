@@ -82,7 +82,8 @@ const Quiz: React.FC = () => {
     } else {
       setQuizState(2);
       setCurrentQuestion(0);
-      
+    }
+  };
 
   return (
     <>
