@@ -40,10 +40,20 @@ const Quiz: React.FC = () => {
   const [score, setScore] = useAtom(scoreAtom);
   const currentQuiz = quizData[currentQuestion];
 
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+
   const handleAnswer = (selectedAnswer: string) => {
+    setSelectedAnswer(selectedAnswer);
     if (selectedAnswer === currentQuiz?.answer) {
       setScore(score + 1);
     }
+    setShowAnswer(true);
+  };
+
+  const handleContinue = () => {
+    setShowAnswer(false);
+    setSelectedAnswer(null);
 
     if (currentQuestion < quizData.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -133,8 +143,19 @@ const Quiz: React.FC = () => {
                 key={index}
                 option={option}
                 handleAnswer={handleAnswer}
+                isCorrectAnswer={option === currentQuiz.answer}
+                isAnswered={showAnswer}
+                isSelected={option === selectedAnswer}
               />
             ))}
+            {showAnswer && (
+              <button
+                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border bg-purple-600 py-2 pt-2 text-white transition-all duration-300 hover:scale-105 hover:bg-purple-400"
+                onClick={handleContinue}
+              >
+                Continue
+              </button>
+            )}
           </motion.div>
         )}
 
@@ -148,19 +169,21 @@ const Quiz: React.FC = () => {
             <QuestionTitle
               title={`You scored ${score} out of ${totalQuestions}`}
             />
-            {quizData.map((question, index) => (
-              <>
-                <p>{question.question}</p>
-                <p>{question.answer}</p>
-              </>
-            ))}
 
-            <button
-              className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-purple-600 py-2 text-white transition-all duration-300 hover:scale-105 hover:border-purple-500 hover:bg-purple-600/25 disabled:pointer-events-none disabled:opacity-50"
-              onClick={handleRestart}
-            >
-              New Quiz
-            </button>
+            <div className="flex flex-col items-center">
+              <button
+                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-purple-600 py-2 text-white transition-all duration-300 hover:scale-105 hover:border-purple-500 hover:bg-purple-600/25 disabled:pointer-events-none disabled:opacity-50"
+                onClick={() => alert("woweeeee")}
+              >
+                Continue this Quiz
+              </button>
+              <button
+                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-purple-600 py-2 text-white transition-all duration-300 hover:scale-105 hover:border-purple-500 hover:bg-purple-600/25 disabled:pointer-events-none disabled:opacity-50"
+                onClick={handleRestart}
+              >
+                New Quiz
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -177,3 +200,4 @@ const Quiz: React.FC = () => {
 };
 
 export default Quiz;
+
