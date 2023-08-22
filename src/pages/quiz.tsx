@@ -1,16 +1,11 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import Layout from "~/components/newlayout/Layout";
+import Layout from "~/components/Layout/Layout";
 import Quiz from "~/components/quiz/Quiz";
-import QuizContainer from "~/components/quiz/QuizContainer";
 
 export default function quizPage({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return (
-    <QuizContainer>
-      <Quiz />
-    </QuizContainer>
-  );
+  return <Quiz />;
 }
 
 quizPage.getLayout = (page: React.ReactElement) => {

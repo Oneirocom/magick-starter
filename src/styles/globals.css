@@ -2,10 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer components {
-  .btn{
+  .btn {
     text-transform: none;
   }
+  .magick-card {
+    @apply flex h-72 w-48 flex-col items-center rounded-[10px] bg-white px-2.5 pb-2.5 pt-1 dark:bg-card-main;
+  }
+  .magick-card-header {
+    @apply flex items-center justify-center gap-2 pt-1 text-black dark:text-white;
+  }
+  .magick-card-image {
+    @apply relative mx-auto h-40 w-36 rounded-[10px] bg-[#18181D] drop-shadow-lg;
+  }
+  .magick-card-title {
+    @apply line-clamp-2 text-center text-lg font-medium capitalize text-black transition-colors duration-300 ease-in-out hover:text-secondary-highlight dark:text-white;
+  }
+  .magick-button {
+    @apply inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#DCE8ED] px-3 py-2 text-black shadow-sm ring-1 ring-secondary-main transition-all duration-200 ease-in-out active:scale-95 dark:bg-[#18181D] dark:text-white;
+  }
+}
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  vertical-align: baseline;
+  animation: blink 1s step-start infinite;
 }

@@ -13,7 +13,7 @@ import {
 
 extend({ WaterPass, UnrealBloomPass, FilmPass, LUTPass });
 
-const QuizScene = () => (
+const Scene = () => (
   <div className="absolute inset-0 -z-10 h-screen w-full">
     <Canvas
       linear
@@ -104,7 +104,7 @@ function Swarm({ count, dummy = new THREE.Object3D() }) {
       </pointLight>
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronGeometry args={[1, 0]} />
-        <meshStandardMaterial color="#1BC5EB" roughness={0.5} />
+        <meshStandardMaterial color="#000" roughness={0.5} />
       </instancedMesh>
     </>
   );
@@ -124,4 +124,4 @@ function Postpro() {
   );
 }
 
-export default QuizScene;
+export default Scene;

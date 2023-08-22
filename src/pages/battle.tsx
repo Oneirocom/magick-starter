@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Monster } from "~/server/api/routers/enemy";
 import Image from "next/image";
 import StatusBar from "~/components/rpg/StatusBar";
-import Layout from "~/components/newlayout/Layout";
+import Layout from "~/components/Layout/Layout";
 import { useAtom } from "jotai";
 import {
   battleStateAtom,
@@ -13,6 +13,9 @@ import {
   enemyMonsterErrorAtom,
   enemyMonsterLoadingAtom,
 } from "~/atoms/atoms";
+import { motion } from "framer-motion";
+import { battleFadeVariants } from "~/motion/battleVariants";
+import Divider from "~/components/shared/Divider";
 
 export default function battle({}: InferGetServerSidePropsType<
   typeof getServerSideProps
@@ -27,7 +30,11 @@ export default function battle({}: InferGetServerSidePropsType<
 
   return (
     <>
-      <div className="grid h-full grid-cols-5 items-center">
+      <motion.div
+        {...battleFadeVariants}
+        key="battle"
+        className="grid h-full grid-cols-5 items-center"
+      >
         {/* Left */}
         <div className="col-span-1">
           <div className="flex flex-col items-center">
@@ -79,7 +86,7 @@ export default function battle({}: InferGetServerSidePropsType<
                   />
                   <div className="text-white">{`Level: ${enemyMonster.data.level}`}</div>
                   <p className="text-white">{enemyMonster.data.description}</p>
-                  <div className="divider" />
+                  <Divider />
 
                   <p className="text-white">{`Attack: ${enemyMonster.data.attributes.attack}`}</p>
                   <p className="text-white">{`Defense: ${enemyMonster.data.attributes.defense}`}</p>
@@ -96,7 +103,7 @@ export default function battle({}: InferGetServerSidePropsType<
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
@@ -155,7 +162,7 @@ const BattleMain = () => {
   return (
     <>
       <div className="text-3xl text-white">{getBattleTitle()}</div>
-      <div className="divider" />
+      <Divider />
       <div className="join">
         <div>
           <div>
