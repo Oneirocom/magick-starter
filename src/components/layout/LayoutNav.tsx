@@ -8,13 +8,7 @@ import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { navbarVariants } from "~/motion/layoutVariants";
-
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Quiz", href: "/quiz" },
-  { name: "Battle", href: "/battle" },
-];
-const userNavigation = [{ name: "Sign out", href: "#" }];
+import { navigation, userNavigation } from "~/config/navigation";
 
 const LayoutNav = ({}: {}) => {
   const { data: user, isLoading, error } = api.player.getCurrentUser.useQuery();

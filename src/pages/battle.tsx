@@ -33,7 +33,7 @@ export default function battle({}: InferGetServerSidePropsType<
       <motion.div
         {...battleFadeVariants}
         key="battle"
-        className="grid h-full grid-cols-5 items-center"
+        className="grid h-full grid-cols-5 items-center rounded-lg border border-secondary-highlight bg-card-main/50 p-8 shadow-md backdrop-blur-xl "
       >
         {/* Left */}
         <div className="col-span-1">

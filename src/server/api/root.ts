@@ -3,6 +3,7 @@ import { createTRPCRouter } from "~/server/api/trpc";
 import { userRouter } from "./routers/user";
 import { enemyRouter } from "./routers/enemy";
 import { quizRouter } from "./routers/quiz";
+import { imageRouter } from "./routers/image";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   player: userRouter,
   enemy: enemyRouter,
   quiz: quizRouter,
+  image: imageRouter,
 });
 
 // export type definition of API
