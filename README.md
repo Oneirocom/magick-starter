@@ -1,1 +1,1 @@
-# RPG powered by MagickML
+# REST Agent examples for MagickML
