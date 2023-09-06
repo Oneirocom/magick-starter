@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import { navbarVariants } from "~/motion/layoutVariants";
 import { navigation, userNavigation } from "~/config/navigation";
 
-const LayoutNav = ({}: {}) => {
+const LayoutNav = () => {
   const { data: user, isLoading, error } = api.player.getCurrentUser.useQuery();
   const router = useRouter();
 

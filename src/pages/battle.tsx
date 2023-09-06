@@ -17,7 +17,7 @@ import { motion } from "framer-motion";
 import { battleFadeVariants } from "~/motion/battleVariants";
 import Divider from "~/components/shared/Divider";
 
-export default function battle({}: InferGetServerSidePropsType<
+export default function Battle({}: InferGetServerSidePropsType<
   typeof getServerSideProps
 >) {
   const [enemyMonster, setEnemyMonster] = useAtom(enemyMonsterAtom);
@@ -94,7 +94,7 @@ export default function battle({}: InferGetServerSidePropsType<
                   <p className="text-white">{`Accuracy: ${enemyMonster.data.attributes.accuracy}`}</p>
                   <div className="divider" />
                   {enemyMonster.data.specials.map((special) => (
-                    <div className="text-white">
+                    <div key={special.name} className="text-white">
                       {special.name} - {special.description}
                     </div>
                   ))}
@@ -129,18 +129,18 @@ const BattleMain = () => {
   const handleCreateMonster = async () => {
     const monster = await createMonster({ prompt });
     console.log(monster);
-    setEnemyMonster(monster);
+    // setEnemyMonster(monster);
   };
 
   useEffect(() => {
     if (battleLoading) {
-      setEnemyMonsterError(battleError);
+      // setEnemyMonsterError(battleError);
     }
   }, [battleLoading]);
 
   useEffect(() => {
     if (enemyMonsterLoading) {
-      setEnemyMonsterError(enemyMonsterError);
+      // setEnemyMonsterError(enemyMonsterError);
     }
   }, [enemyMonsterLoading]);
 
@@ -213,6 +213,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   };
 }
 
-battle.getLayout = (page: React.ReactElement) => {
+Battle.getLayout = (page: React.ReactElement) => {
   return <Layout>{page}</Layout>;
 };

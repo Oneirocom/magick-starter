@@ -20,13 +20,26 @@ export const quizRouter = createTRPCRouter({
     )
     .mutation(async ({ input, ctx }) => {
       console.log("fetching quiz");
+
       const result = await fetch(
-        `${
-          process.env.MAGICK_URL
-        }/api/?apiKey=0d1dcec0ce1667a7b8b113630b09fc90&agentId=b5bc97b8-73de-4188-b441-4f635a32df56&content=${encodeURIComponent(
-          input.prompt || ""
-        )}`
+        `http://localhost:3030/api/b5bc97b8-73de-4188-b441-4f635a32df56?content=${encodeURIComponent(
+          input.prompt ?? ""
+        )}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: "0d1dcec0ce1667a7b8b113630b09fc90",
+          },
+        }
       );
+
+      // const result = await fetch(
+      //   `${
+      //     process.env.MAGICK_URL
+      // }/api/?apiKey=0d1dcec0ce1667a7b8b113630b09fc90&agentId=b5bc97b8-73de-4188-b441-4f635a32df56&content=${encodeURIComponent(
+      //   input.prompt || ""
+      // )}`
+      // );
       console.log("fetched quiz");
       const quizJson = await result.json();
       console.log(quizJson);

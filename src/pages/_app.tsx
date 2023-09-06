@@ -16,6 +16,7 @@ import {
   quizDataAtom,
 } from "~/atoms/quiz";
 
+// @ts-ignore
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
 };

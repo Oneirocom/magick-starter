@@ -7,9 +7,7 @@ import { heroTextVariants } from "~/motion/homeVariants";
 import Typewriter from "../shared/TypeWriter";
 import { signIn } from "next-auth/react";
 
-type Props = {};
-
-const Hero = (props: Props) => {
+const Hero = () => {
   const { data: session, status } = useSession();
 
   const handleLogin = () => {

@@ -36,7 +36,7 @@ const Character = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      let newPosition: [number, number, number] = [...characterPosition] as [
+      const newPosition: [number, number, number] = [...characterPosition] as [
         number,
         number,
         number

@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { Monster } from "~/server/api/routers/enemy";
+import type { Monster } from "~/server/api/routers/enemy";
 
 export type BattleState = "idle" | "battle" | "victory" | "defeat";
 

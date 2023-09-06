@@ -4,9 +4,8 @@ import { useAtom } from "jotai";
 import { selectedImageIndexAtom, imageResultsAtom } from "~/atoms/image";
 import clsx from "clsx";
 
-type Props = {};
 
-const ImageThumbs = (props: Props) => {
+const ImageThumbs = () => {
   const [imageResults, setImageResults] = useAtom(imageResultsAtom);
   const imagesPerPage = 10;
   const totalPages = Math.ceil(imageResults.length / imagesPerPage);

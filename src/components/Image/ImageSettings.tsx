@@ -18,9 +18,7 @@ import {
 } from "~/atoms/image";
 import { useAtom } from "jotai";
 
-type Props = {};
-
-const ImageSettings = (props: Props) => {
+const ImageSettings = () => {
   const [negativePrompt, setNegativePrompt] = useAtom(negativePromptAtom);
   const [width, setWidth] = useAtom(widthAtom);
   const [height, setHeight] = useAtom(heightAtom);

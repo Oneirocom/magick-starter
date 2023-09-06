@@ -25,7 +25,7 @@ const AINPC = () => {
 
   useEffect(() => {
     const moveAI = setInterval(() => {
-      let newAiPosition: [number, number, number] = [...aiNPCPosition];
+      const newAiPosition: [number, number, number] = [...aiNPCPosition];
       const randomDirection = Math.floor(Math.random() * 4);
 
       switch (randomDirection) {

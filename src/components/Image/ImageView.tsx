@@ -3,9 +3,8 @@ import React from "react";
 import { useAtomValue } from "jotai";
 import { imageResultsAtom, selectedImageIndexAtom } from "~/atoms/image";
 
-type Props = {};
 
-const ImageView = (props: Props) => {
+const ImageView = () => {
   const selectedImage = useAtomValue(selectedImageIndexAtom);
   const imageResults = useAtomValue(imageResultsAtom);
   return (

@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type Props = {};
 
-const PBM = (props: Props) => {
+const PBM = () => {
   return (
     <Link
       href="https://magickml.com/"
