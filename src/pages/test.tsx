@@ -1,5 +1,3 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-
 export default function testPage() {
   return (
     <div>

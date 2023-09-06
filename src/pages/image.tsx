@@ -1,20 +1,20 @@
-import { Layout } from "~/components/Layout/Layout";
+import { Layout } from "../components/Layout/Layout";
 import { motion } from "framer-motion";
-import FormControl from "~/components/shared/FormControl";
-import ImageSettings from "~/components/Image/ImageSettings";
-import ImageSide from "~/components/Image/ImageSide";
-import FormTextArea from "~/components/shared/FormTextArea";
+import FormControl from "../components/shared/FormControl";
+import ImageSettings from "../components/Image/ImageSettings";
+import ImageSide from "../components/Image/ImageSide";
+import FormTextArea from "../components/shared/FormTextArea";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import {
   promptAtom,
   imageSettingsOpenAtom,
   imageResultsAtom,
   imageAtom,
-} from "~/atoms/image";
+} from "../atoms/image";
 import { useAtom } from "jotai";
-import ImageThumbs from "~/components/Image/ImageThumbs";
-import ImageView from "~/components/Image/ImageView";
-import { api } from "~/utils/api";
+import ImageThumbs from "../components/Image/ImageThumbs";
+import ImageView from "../components/Image/ImageView";
+import { api } from "../utils/api";
 
 export default function ImageGeneration() {
   const [settingsOpen, setSettingsOpen] = useAtom(imageSettingsOpenAtom);
