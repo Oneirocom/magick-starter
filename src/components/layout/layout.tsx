@@ -5,7 +5,7 @@ import Scene from "./Scene";
 import LayoutMain from "./LayoutMain";
 import { AnimatePresence } from "framer-motion";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+export const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   return (
     <div className="overflow-hidden">
@@ -20,4 +20,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     </div>
   );
 };
-export default Layout;
+
