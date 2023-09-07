@@ -22,13 +22,13 @@ export const quizRouter = createTRPCRouter({
       console.log("fetching quiz");
 
       const result = await fetch(
-        `http://localhost:3030/api/b5bc97b8-73de-4188-b441-4f635a32df56?content=${encodeURIComponent(
+        `https://magick-dev.herokuapp.com/api/f16663ef-10b4-4e22-a0c1-c6b6dc0e3eef?content=${encodeURIComponent(
           input.prompt ?? ""
         )}`,
         {
           method: "GET",
           headers: {
-            Authorization: "0d1dcec0ce1667a7b8b113630b09fc90",
+            Authorization: "4add7a98b626c0bccc3a9ed32161de60",
           },
         }
       );
@@ -46,7 +46,7 @@ export const quizRouter = createTRPCRouter({
 
       // Get the string representation from "Output - Default"
       const quizString: string =
-        quizJson?.result?.["Output - REST API (Response)"];
+        quizJson?.result?.["Output - Default"];
       if (!quizString) {
         throw new Error("Failed to get quiz string data");
       }
