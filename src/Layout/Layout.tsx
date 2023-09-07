@@ -14,10 +14,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <AnimatePresence mode="wait">
           <LayoutMain key={router.asPath}>{children}</LayoutMain>
         </AnimatePresence>
-        <PBM />
+        <PBM classNames="hidden md:block absolute bottom-12 left-1/2 z-[5] -translate-x-1/2 translate-y-1/2" />
         <Scene />
       </div>
     </div>
   );
 };
-

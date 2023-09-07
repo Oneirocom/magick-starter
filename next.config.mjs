@@ -8,7 +8,7 @@ await import("./src/env.mjs");
 const config = {
   reactStrictMode: true,
   images: {
-    domains: ["s3.amazonaws.com"],
+    domains: ["s3.amazonaws.com", "cdn.discordapp.com"],
   },
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.

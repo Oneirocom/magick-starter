@@ -13,7 +13,6 @@ import QuizScore from "./QuizScore";
 
 import { api } from "~/utils/api";
 import { useState } from "react";
-import clsx from "clsx";
 import Divider from "../shared/Divider";
 
 const Quiz: React.FC = () => {
@@ -85,105 +84,103 @@ const Quiz: React.FC = () => {
   };
 
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {quizState === 0 && (
-          <motion.form
-            key="quiz-form"
-            {...questionVariants}
-            className="styled-card"
-            onClick={(e) => e.preventDefault()}
+    <AnimatePresence mode="wait">
+      {quizState === 0 && (
+        <motion.form
+          key="quiz-form"
+          {...questionVariants}
+          className="styled-card"
+          onClick={(e) => e.preventDefault()}
+        >
+          <input
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            className="mb-4 w-full rounded-md bg-secondary-highlight/50 p-2 text-white placeholder:text-white/70"
+            placeholder="Enter a topic for your quiz..."
+          />
+
+          <button
+            type="submit"
+            className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:border-opacity-50 disabled:text-white"
+            onClick={handleGetQuiz}
+            disabled={isQuizLoading || prompt.length === 0}
           >
-            <input
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              className="mb-4 w-full rounded-md bg-secondary-highlight/50 p-2 text-white placeholder:text-white/70"
-              placeholder="Enter a topic for your quiz..."
-            />
-
-            <button
-              type="submit"
-              className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:border-opacity-50 disabled:text-white"
-              onClick={handleGetQuiz}
-              disabled={isQuizLoading || prompt.length === 0}
-            >
-              {isQuizLoading && (
-                <span className="loading loading-spinner loading-md mr-2" />
-              )}
-
-              {isQuizLoading
-                ? "Loading..."
-                : prompt.length === 0
-                ? "Enter a topic above to start"
-                : "Start Quiz"}
-            </button>
-          </motion.form>
-        )}
-
-        {quizState === 1 && (
-          <motion.div
-            key={`question-${currentQuestion}`}
-            {...questionVariants}
-            className="styled-card"
-          >
-            <QuizScore
-              currentQuestion={currentQuestion}
-              quizDataLength={totalQuestions}
-            />
-
-            <QuestionTitle title={currentQuiz?.question || "Error"} />
-            <Divider />
-            {currentQuiz?.options.map((option, index) => (
-              <AnswerButton
-                key={index}
-                option={option}
-                handleAnswer={handleAnswer}
-                isCorrectAnswer={option === currentQuiz.answer}
-                isAnswered={showAnswer}
-                isSelected={option === selectedAnswer}
-              />
-            ))}
-            {showAnswer && (
-              <button
-                className="mb-2 mt-8 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border bg-secondary-highlight py-2 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-secondary-main"
-                onClick={handleContinue}
-              >
-                Continue
-              </button>
+            {isQuizLoading && (
+              <span className="loading loading-spinner loading-md mr-2" />
             )}
-          </motion.div>
-        )}
 
-        {quizState === 2 && (
-          <motion.div
-            key="quiz-results"
-            initial={{ opacity: 0, scale: isLowScore ? 0.8 : 1.2 }}
-            animate={animateProps}
-            exit={{ opacity: 0, scale: 0.5 }}
-            className="styled-card"
-          >
-            <QuestionTitle
-              title={`You scored ${score} out of ${totalQuestions}`}
+            {isQuizLoading
+              ? "Loading..."
+              : prompt.length === 0
+              ? "Enter a topic above to start"
+              : "Start Quiz"}
+          </button>
+        </motion.form>
+      )}
+
+      {quizState === 1 && (
+        <motion.div
+          key={`question-${currentQuestion}`}
+          {...questionVariants}
+          className="styled-card"
+        >
+          <QuizScore
+            currentQuestion={currentQuestion}
+            quizDataLength={totalQuestions}
+          />
+
+          <QuestionTitle title={currentQuiz?.question || "Error"} />
+          <Divider />
+          {currentQuiz?.options.map((option, index) => (
+            <AnswerButton
+              key={index}
+              option={option}
+              handleAnswer={handleAnswer}
+              isCorrectAnswer={option === currentQuiz.answer}
+              isAnswered={showAnswer}
+              isSelected={option === selectedAnswer}
             />
+          ))}
+          {showAnswer && (
+            <button
+              className="mb-2 mt-8 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border bg-secondary-highlight py-2 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-secondary-main"
+              onClick={handleContinue}
+            >
+              Continue
+            </button>
+          )}
+        </motion.div>
+      )}
 
-            <div className="flex flex-col items-center">
-              {/* <button
+      {quizState === 2 && (
+        <motion.div
+          key="quiz-results"
+          initial={{ opacity: 0, scale: isLowScore ? 0.8 : 1.2 }}
+          animate={animateProps}
+          exit={{ opacity: 0, scale: 0.5 }}
+          className="styled-card"
+        >
+          <QuestionTitle
+            title={`You scored ${score} out of ${totalQuestions}`}
+          />
+
+          <div className="flex flex-col items-center">
+            {/* <button
                 className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
                 onClick={() => alert("woweeeee")}
               >
                 Continue this Quiz
               </button> */}
-              <button
-                className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
-                onClick={handleRestart}
-              >
-                New Quiz
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+            <button
+              className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
+              onClick={handleRestart}
+            >
+              New Quiz
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

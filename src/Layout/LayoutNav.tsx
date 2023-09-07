@@ -9,9 +9,11 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { navbarVariants } from "~/motion/layoutVariants";
 import { navigation, userNavigation } from "~/config/navigation";
+import { signOut, useSession } from "next-auth/react";
+import PBM from "./PBM";
 
 const LayoutNav = () => {
-  const { data: user, isLoading, error } = api.player.getCurrentUser.useQuery();
+  const { data: user, status } = useSession();
   const router = useRouter();
 
   return (
@@ -27,9 +29,9 @@ const LayoutNav = () => {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <Image
-                      className="h-12  object-contain"
+                      className="h-10  object-contain"
                       src="/images/logo.png"
-                      alt="Espresso RPG"
+                      alt="MagickML Logo"
                       width={64}
                       height={64}
                     />
@@ -61,54 +63,70 @@ const LayoutNav = () => {
                     </div>
                   </div>
                 </div>
-                <div className="hidden md:block">
-                  <div className="ml-4 flex items-center md:ml-6">
-                    {/* Profile dropdown */}
-                    <Menu as="div" className="relative ml-3">
-                      <div>
-                        <Menu.Button className="bg-gray-800 focus:ring-offset-gray-800 relative flex max-w-xs items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
-                          <span className="absolute -inset-1.5" />
-                          <span className="sr-only">Open user menu</span>
-                          <img
-                            className="h-8 w-8 rounded-full"
-                            src={user?.image ?? ""}
-                            alt=""
-                          />
-                        </Menu.Button>
-                      </div>
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <Link
-                                  href={item.href}
-                                  className={clsx(
-                                    active ? "bg-gray-100" : "",
-                                    "text-gray-700 block px-4 py-2 text-sm"
-                                  )}
-                                >
-                                  {item.name}
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          ))}
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
+                {status === "loading" && (
+                  <div className="flex items-center">
+                    <span className="loading loading-dots loading-md mr-2 text-white" />
                   </div>
-                </div>
+                )}
+
+                <PBM classNames="block md:hidden" width={160} height={40} />
+                {status === "authenticated" && user && (
+                  <div className="hidden md:block">
+                    <div className="ml-4 flex items-center md:ml-6">
+                      {/* Profile dropdown */}
+                      <Menu as="div" className="relative ml-3">
+                        <div>
+                          <Menu.Button className="bg-gray-800 relative flex max-w-xs items-center rounded-full text-sm ring-1 ring-secondary-highlight transition-all duration-200 hover:scale-110">
+                            <span className="absolute -inset-1.5" />
+                            <span className="sr-only">Open user menu</span>
+                            <Image
+                              className="h-8 w-8 rounded-full"
+                              src={user.user.image ?? "/images/logo.png"}
+                              alt="user-image"
+                              width={32}
+                              height={32}
+                            />
+                          </Menu.Button>
+                        </div>
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-card-main py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {userNavigation.map((item) => (
+                              <Menu.Item key={item.name}>
+                                {({ active }) => (
+                                  <button
+                                    onClick={() => {
+                                      if (item.name === "Sign out") {
+                                        signOut({ redirect: false });
+                                      }
+                                    }}
+                                    className={clsx(
+                                      active ? "bg" : "",
+                                      "block px-4 py-2 text-sm text-white"
+                                    )}
+                                  >
+                                    {item.name}
+                                  </button>
+                                )}
+                              </Menu.Item>
+                            ))}
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    </div>
+                  </div>
+                )}
+                {/* Mobile menu button */}
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="bg-gray-800 text-gray-400 hover:bg-gray-700 focus:ring-offset-gray-800 relative inline-flex items-center justify-center rounded-md p-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+                  <Disclosure.Button className=" relative inline-flex items-center justify-center rounded-md p-2 text-white hover:text-secondary-highlight focus:outline-none focus:ring-2 focus:ring-secondary-highlight">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
@@ -122,17 +140,17 @@ const LayoutNav = () => {
             </div>
 
             <Disclosure.Panel className="md:hidden">
-              <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+              <div className="flex flex-col space-y-1 bg-gradient-to-r from-card-main/70 via-card-main/50 to-card-main/60 px-2 pb-3 pt-2 saturate-150 backdrop-blur-2xl sm:px-3">
                 {navigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
-                    as="a"
+                    as={Link}
                     href={item.href}
                     className={clsx(
                       item.href === router.asPath
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
+                        ? "border-secondary-highlight text-white"
+                        : "text-gray-300 border-transparent hover:border-secondary-highlight",
+                      "rounded-md border px-3 py-2 text-sm font-medium text-white transition-all duration-150 ease-in-out hover:border-secondary-highlight"
                     )}
                     aria-current={
                       item.href === router.asPath ? "page" : undefined
@@ -142,12 +160,12 @@ const LayoutNav = () => {
                   </Disclosure.Button>
                 ))}
               </div>
-              <div className="border-gray-700 border-t pb-3 pt-4">
+              <div className="border-t-card-main bg-gradient-to-r from-card-main/70 via-card-main/50 to-card-main/60 pb-3 pt-4 saturate-200 backdrop-blur-2xl">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
                     <Image
                       className="h-10 w-10 rounded-full"
-                      src={user?.image ?? "/images/logo.png"}
+                      src={user?.user?.image ?? "/images/logo.png"}
                       alt=""
                       width={40}
                       height={40}
@@ -155,10 +173,10 @@ const LayoutNav = () => {
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
-                      {user?.name ?? ""}
+                      {user?.user.name ?? ""}
                     </div>
                     <div className="text-gray-400 text-sm font-medium leading-none">
-                      {user?.email ?? ""}
+                      {user?.user.email ?? ""}
                     </div>
                   </div>
                 </div>

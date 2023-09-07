@@ -17,7 +17,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>Magick REST Starter</title>
+          {/* <title>Magick REST Starter</title> */}
           <meta name="description" content="Powered by MagickML" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
