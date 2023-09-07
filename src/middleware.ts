@@ -7,7 +7,7 @@ export const config = { matcher: ["/quiz"] };
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
-  if (!token && process.env.NEXTAUTH_URL) {
-    return NextResponse.redirect(process.env.NEXTAUTH_URL);
+  if (!token) {
+    return NextResponse.redirect('/');
   }
 }

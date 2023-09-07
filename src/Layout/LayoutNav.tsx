@@ -114,7 +114,7 @@ const LayoutNav = () => {
                                     }}
                                     className={clsx(
                                       active ? "bg" : "",
-                                      "block px-4 py-2 text-sm text-white"
+                                      "block px-4 py-2 text-sm text-white w-full text-left"
                                     )}
                                   >
                                     {item.name}
