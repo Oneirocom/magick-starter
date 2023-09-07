@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
 
 export type Question = {
   question: string; // the unique question based on the users topic
@@ -12,7 +12,7 @@ export interface IQuiz {
 }
 
 export const quizRouter = createTRPCRouter({
-  getQuiz: protectedProcedure
+  getQuiz: publicProcedure
     .input(
       z.object({
         prompt: z.string().optional(),
