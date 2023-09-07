@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 export type Question = {
   question: string; // the unique question based on the users topic
@@ -19,19 +23,24 @@ export const quizRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      console.log("fetching quiz");
+      console.log(input);
 
-      const result = await fetch(
-        `https://magick-dev.herokuapp.com/api/f16663ef-10b4-4e22-a0c1-c6b6dc0e3eef?content=${encodeURIComponent(
-          input.prompt ?? ""
-        )}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: "4add7a98b626c0bccc3a9ed32161de60",
-          },
-        }
-      );
+      const content = {
+        prompt: input.prompt || "magick",
+        model: "gpt",
+      };
+
+      const result = await fetch("https://magick-dev.herokuapp.com/api", {
+        method: "POST",
+        headers: {
+          Authorization: "4add7a98b626c0bccc3a9ed32161de60",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: JSON.stringify(content),
+          agentId: "f16663ef-10b4-4e22-a0c1-c6b6dc0e3eef",
+        }),
+      });
 
       // const result = await fetch(
       //   `${
@@ -46,7 +55,7 @@ export const quizRouter = createTRPCRouter({
 
       // Get the string representation from "Output - Default"
       const quizString: string =
-        quizJson?.result?.["Output - Default"];
+        quizJson?.result?.["Output - REST API (Response)"];
       if (!quizString) {
         throw new Error("Failed to get quiz string data");
       }
