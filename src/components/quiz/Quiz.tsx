@@ -167,12 +167,12 @@ const Quiz: React.FC = () => {
             />
 
             <div className="flex flex-col items-center">
-              <button
+              {/* <button
                 className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
                 onClick={() => alert("woweeeee")}
               >
                 Continue this Quiz
-              </button>
+              </button> */}
               <button
                 className="mb-2 flex w-full flex-row flex-nowrap items-center justify-center rounded-md border border-secondary-highlight py-2 text-white transition-all duration-300 hover:scale-105 hover:border-secondary-highlight hover:bg-secondary-highlight/25 disabled:pointer-events-none disabled:opacity-50"
                 onClick={handleRestart}
