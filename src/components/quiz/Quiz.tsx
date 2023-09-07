@@ -14,6 +14,8 @@ import QuizScore from "./QuizScore";
 import { api } from "~/utils/api";
 import { useState } from "react";
 import Divider from "../shared/Divider";
+import ViewSpell from "../shared/ViewSpell";
+import { spells } from "~/config/spells";
 
 const Quiz: React.FC = () => {
   const {
@@ -88,11 +90,12 @@ const Quiz: React.FC = () => {
     <AnimatePresence mode="wait">
       {quizState === 0 && (
         <motion.form
-          key="quiz-form"
+          key="quiz-form relative"
           {...questionVariants}
           className="styled-card"
           onClick={(e) => e.preventDefault()}
         >
+          <ViewSpell {...spells[0]} />
           <label
             htmlFor="model"
             className="block text-sm font-medium leading-6 text-white"

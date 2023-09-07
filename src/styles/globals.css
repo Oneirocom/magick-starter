@@ -19,7 +19,7 @@
     @apply line-clamp-2 text-center text-lg font-medium capitalize text-black transition-colors duration-300 ease-in-out hover:text-secondary-highlight dark:text-white;
   }
   .magick-button {
-    @apply inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#DCE8ED] px-3 py-2 text-black shadow-sm ring-1 ring-secondary-main transition-all duration-200 ease-in-out active:scale-95 dark:bg-[#18181D] dark:text-white;
+    @apply inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#DCE8ED] px-3 py-2 text-black shadow-sm ring-1 ring-secondary-highlight transition-all duration-200 ease-in-out active:scale-95 dark:bg-[#18181D] dark:text-white;
   }
 }
 @keyframes blink {

@@ -1,0 +1,922 @@
+{
+    "id": "f285ed4a-8739-47b7-94fc-b81197446a2d",
+    "name": "overwhelming moccasin",
+    "projectId": "clm8a8rgq0003ju0827ypyxqm",
+    "hash": "c27b92ec5f10f3ff76f8ab13112ef06b",
+    "createdAt": "1694124865154",
+    "updatedAt": "1694128013459",
+    "creatorId": null,
+    "graph": {
+        "id": "demo@0.1.0",
+        "nodes": {
+            "232": {
+                "id": 232,
+                "data": {
+                    "name": "Input - REST API (POST)",
+                    "text": {
+                        "id": "2eb64348-adee-4118-bcca-19697ca3a16a",
+                        "inputs": {},
+                        "secrets": {},
+                        "projectId": "bb1b3d24-84e0-424e-b4f1-57603f307a89",
+                        "spellName": "Starter",
+                        "publicVariables": "[]"
+                    },
+                    "isInput": true,
+                    "outputs": [],
+                    "success": false,
+                    "inputName": "Default",
+                    "inputType": "REST API (POST)",
+                    "socketKey": "9d61118c-3c5a-4379-9dae-41965e56207f",
+                    "useDefault": false,
+                    "dataControls": {
+                        "inputType": {
+                            "expanded": true
+                        },
+                        "useDefault": {
+                            "expanded": true
+                        },
+                        "defaultValue": {
+                            "expanded": true
+                        }
+                    },
+                    "defaultValue": "Hello world",
+                    "playtestToggle": {
+                        "outputs": [],
+                        "receivePlaytest": false
+                    }
+                },
+                "inputs": {},
+                "outputs": {
+                    "output": {
+                        "connections": [
+                            {
+                                "node": 494,
+                                "input": "event",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 494,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    -784,
+                    -128
+                ],
+                "name": "Input"
+            },
+            "233": {
+                "id": 233,
+                "data": {
+                    "name": "Output - REST API (Response)",
+                    "success": false,
+                    "isOutput": true,
+                    "socketKey": "0f17a35e-1380-428b-bc87-4a38d207fefc",
+                    "outputType": "REST API (Response)",
+                    "dataControls": {
+                        "name": {
+                            "expanded": true
+                        }
+                    },
+                    "sendToPlaytest": true
+                },
+                "inputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 535,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "input": {
+                        "connections": [
+                            {
+                                "node": 535,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "event": {
+                        "connections": []
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": []
+                    },
+                    "output": {
+                        "connections": []
+                    }
+                },
+                "position": [
+                    1280,
+                    -64
+                ],
+                "name": "Output"
+            },
+            "494": {
+                "id": 494,
+                "data": {
+                    "success": false,
+                    "socketKey": "bbd9c07c-7bcc-454a-b5fe-cc6fd63f6a94"
+                },
+                "inputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 232,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "event": {
+                        "connections": [
+                            {
+                                "node": 232,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 555,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "agentId": {
+                        "connections": []
+                    },
+                    "content": {
+                        "connections": [
+                            {
+                                "node": 555,
+                                "input": "input",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "client": {
+                        "connections": []
+                    },
+                    "channel": {
+                        "connections": []
+                    },
+                    "channelType": {
+                        "connections": []
+                    },
+                    "connector": {
+                        "connections": []
+                    },
+                    "entities": {
+                        "connections": []
+                    },
+                    "projectId": {
+                        "connections": []
+                    },
+                    "observer": {
+                        "connections": []
+                    },
+                    "sender": {
+                        "connections": []
+                    },
+                    "embedding": {
+                        "connections": []
+                    },
+                    "rawData": {
+                        "connections": []
+                    }
+                },
+                "position": [
+                    -432,
+                    -160
+                ],
+                "name": "Event Destructure"
+            },
+            "519": {
+                "id": 519,
+                "data": {
+                    "inputs": [
+                        {
+                            "name": "prompt",
+                            "taskType": "output",
+                            "socketKey": "prompt",
+                            "socketType": "anySocket",
+                            "connectionType": "input"
+                        }
+                    ],
+                    "fewshot": "Generate a 5-question quiz on the topic: {{prompt}}. \n\r\nEach question should be unique and relevant to the specified topic, and the content of the question should not be repeated in the answers. Please provide 4 multiple-choice answers for each question, ensuring that one answer is correct and the other three are plausible but incorrect. Ensure that no part of the question is repeated in the answers (e.g., if the question is \"Where in Oregon is Salem?\" the answer should not contain the words \"Salem\" or \"Oregon\".). Organize the questions and answers in a clear and concise format.",
+                    "success": false
+                },
+                "inputs": {
+                    "prompt": {
+                        "connections": [
+                            {
+                                "node": 554,
+                                "output": "prompt",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 554,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 559,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "prompt": {
+                        "connections": [
+                            {
+                                "node": 534,
+                                "input": "input",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            },
+                            {
+                                "node": 558,
+                                "input": "input",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    -96,
+                    -96
+                ],
+                "name": "Text Template"
+            },
+            "532": {
+                "id": 532,
+                "data": {
+                    "name": "schema",
+                    "fewshot": "type Question = {\n  question: string; // the unique question based on the users topic\r\n  options: string[]; // unique options for each question\r\n  answer: string; // the correct answer for each question\r\n};\r\n\r\nexport interface IQuiz {\r\n  quizData: Question[];\r\n}",
+                    "success": false,
+                    "isPublic": false
+                },
+                "inputs": {},
+                "outputs": {
+                    "output": {
+                        "connections": [
+                            {
+                                "node": 534,
+                                "input": "schema",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            },
+                            {
+                                "node": 558,
+                                "input": "schema",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    -128,
+                    32
+                ],
+                "name": "Text Variable"
+            },
+            "533": {
+                "id": 533,
+                "data": {
+                    "_var": "IQuiz",
+                    "name": "response",
+                    "success": false,
+                    "isPublic": false
+                },
+                "inputs": {},
+                "outputs": {
+                    "output": {
+                        "connections": [
+                            {
+                                "node": 534,
+                                "input": "responseType",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            },
+                            {
+                                "node": 558,
+                                "input": "responseType",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    -128,
+                    160
+                ],
+                "name": "String Variable"
+            },
+            "534": {
+                "id": 534,
+                "data": {
+                    "error": false,
+                    "model": "gpt-3.5-turbo",
+                    "success": false,
+                    "socketKey": null
+                },
+                "inputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 559,
+                                "output": "false",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "input": {
+                        "connections": [
+                            {
+                                "node": 519,
+                                "output": "prompt",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "schema": {
+                        "connections": [
+                            {
+                                "node": 532,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "responseType": {
+                        "connections": [
+                            {
+                                "node": 533,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 557,
+                                "input": "gpt-3.5 trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "result": {
+                        "connections": [
+                            {
+                                "node": 557,
+                                "input": "gpt-3.5 data",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "error": {
+                        "connections": []
+                    }
+                },
+                "position": [
+                    256,
+                    192
+                ],
+                "name": "TypeChat"
+            },
+            "535": {
+                "id": 535,
+                "data": {
+                    "success": false
+                },
+                "inputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 557,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "input": {
+                        "connections": [
+                            {
+                                "node": 557,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 233,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "output": {
+                        "connections": [
+                            {
+                                "node": 233,
+                                "input": "input",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    896,
+                    -48
+                ],
+                "name": "Object To JSON"
+            },
+            "554": {
+                "id": 554,
+                "data": {
+                    "outputs": [
+                        {
+                            "name": "model",
+                            "taskType": "output",
+                            "socketKey": "model",
+                            "connectionType": "output",
+                            "socketType": "anySocket"
+                        },
+                        {
+                            "name": "prompt",
+                            "taskType": "output",
+                            "socketKey": "prompt",
+                            "connectionType": "output",
+                            "socketType": "anySocket"
+                        }
+                    ]
+                },
+                "inputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 555,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "object": {
+                        "connections": [
+                            {
+                                "node": 555,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 519,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "prompt": {
+                        "connections": [
+                            {
+                                "node": 519,
+                                "input": "prompt",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "model": {
+                        "connections": [
+                            {
+                                "node": 559,
+                                "input": "string",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    -16,
+                    -272
+                ],
+                "name": "Get Values From Object"
+            },
+            "555": {
+                "id": 555,
+                "data": {},
+                "inputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 494,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "input": {
+                        "connections": [
+                            {
+                                "node": 494,
+                                "output": "content",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 554,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "output": {
+                        "connections": [
+                            {
+                                "node": 554,
+                                "input": "object",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    -336,
+                    -320
+                ],
+                "name": "JSON To Object"
+            },
+            "557": {
+                "id": 557,
+                "data": {
+                    "inputs": [
+                        {
+                            "name": "gpt-3.5 trigger",
+                            "taskType": "option",
+                            "socketKey": "gpt-3.5 trigger",
+                            "connectionType": "input",
+                            "socketType": "triggerSocket"
+                        },
+                        {
+                            "name": "gpt-3.5 data",
+                            "taskType": "output",
+                            "socketKey": "gpt-3.5 data",
+                            "connectionType": "input",
+                            "socketType": "anySocket"
+                        },
+                        {
+                            "name": "gpt-4 trigger",
+                            "taskType": "option",
+                            "socketKey": "gpt-4 trigger",
+                            "connectionType": "input",
+                            "socketType": "triggerSocket"
+                        },
+                        {
+                            "name": "gpt-4 data",
+                            "taskType": "output",
+                            "socketKey": "gpt-4 data",
+                            "connectionType": "input",
+                            "socketType": "anySocket"
+                        }
+                    ]
+                },
+                "inputs": {
+                    "gpt-3.5 trigger": {
+                        "connections": [
+                            {
+                                "node": 534,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "gpt-3.5 data": {
+                        "connections": [
+                            {
+                                "node": 534,
+                                "output": "result",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "gpt-4 trigger": {
+                        "connections": [
+                            {
+                                "node": 558,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "gpt-4 data": {
+                        "connections": [
+                            {
+                                "node": 558,
+                                "output": "result",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 535,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "output": {
+                        "connections": [
+                            {
+                                "node": 535,
+                                "input": "input",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    592,
+                    -48
+                ],
+                "name": "Exclusive Gate"
+            },
+            "558": {
+                "id": 558,
+                "data": {
+                    "error": false,
+                    "model": "gpt-4",
+                    "success": false,
+                    "socketKey": null
+                },
+                "inputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 559,
+                                "output": "true",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "input": {
+                        "connections": [
+                            {
+                                "node": 519,
+                                "output": "prompt",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "schema": {
+                        "connections": [
+                            {
+                                "node": 532,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "responseType": {
+                        "connections": [
+                            {
+                                "node": 533,
+                                "output": "output",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 557,
+                                "input": "gpt-4 trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "result": {
+                        "connections": [
+                            {
+                                "node": 557,
+                                "input": "gpt-4 data",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "error": {
+                        "connections": []
+                    }
+                },
+                "position": [
+                    256,
+                    0
+                ],
+                "name": "TypeChat"
+            },
+            "559": {
+                "id": 559,
+                "data": {
+                    "fewshot": "gpt-4",
+                    "operationType": "equals"
+                },
+                "inputs": {
+                    "string": {
+                        "connections": [
+                            {
+                                "node": 554,
+                                "output": "model",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "trigger": {
+                        "connections": [
+                            {
+                                "node": 519,
+                                "output": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "outputs": {
+                    "true": {
+                        "connections": [
+                            {
+                                "node": 558,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    },
+                    "false": {
+                        "connections": [
+                            {
+                                "node": 534,
+                                "input": "trigger",
+                                "data": {
+                                    "hello": "hello"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "position": [
+                    240,
+                    -160
+                ],
+                "name": "Evaluate Text"
+            }
+        },
+        "comments": []
+    }
+}
