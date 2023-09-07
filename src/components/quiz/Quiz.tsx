@@ -23,12 +23,13 @@ const Quiz: React.FC = () => {
     error: quizError,
   } = api.quiz.getQuiz.useMutation();
   const [prompt, setPrompt] = useState("");
+  const [model, setModel] = useState("");
   const [quizState, setQuizState] = useAtom(quizStateAtom);
   const [quizData, setQuizData] = useAtom(quizDataAtom);
 
   const handleGetQuiz = async () => {
     try {
-      const data = await getQuiz({ prompt });
+      const data = await getQuiz({ prompt, model });
       setQuizData(data.quizData);
       setQuizState(1);
     } catch (error) {
@@ -92,7 +93,32 @@ const Quiz: React.FC = () => {
           className="styled-card"
           onClick={(e) => e.preventDefault()}
         >
+          <label
+            htmlFor="model"
+            className="block text-sm font-medium leading-6 text-white"
+          >
+            Model
+          </label>
+          <select
+            id="model"
+            name="model"
+            className="mb-4 w-full rounded-md bg-secondary-highlight/50 p-2 text-white placeholder:text-white/70"
+            defaultValue="gpt-3.5"
+            onChange={(e) => setModel(e.target.value)}
+          >
+            <option>gpt-3.5</option>
+            <option>gpt-4</option>
+          </select>
+          <label
+            htmlFor="prompt"
+            className="block text-sm font-medium leading-6 text-white"
+          >
+            Topic
+          </label>
           <input
+            id="prompt"
+            name="prompt"
+            type="text"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             className="mb-4 w-full rounded-md bg-secondary-highlight/50 p-2 text-white placeholder:text-white/70"

@@ -20,6 +20,7 @@ export const quizRouter = createTRPCRouter({
     .input(
       z.object({
         prompt: z.string().optional(),
+        model: z.string().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -27,7 +28,7 @@ export const quizRouter = createTRPCRouter({
 
       const content = {
         prompt: input.prompt || "magick",
-        model: "gpt",
+        model: input.model || "gpt-3.5",
       };
 
       const result = await fetch("https://magick-dev.herokuapp.com/api", {
