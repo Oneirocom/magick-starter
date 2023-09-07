@@ -16,8 +16,11 @@ const LayoutNav = () => {
   const { data: user, status } = useSession();
   const router = useRouter();
 
+  const navItems =
+    status === "authenticated" ? navigation : navigation.slice(0, 1);
+
   return (
-    <motion.div key="layout-nav" {...navbarVariants}>
+    <motion.div key="layout-nav z-20" {...navbarVariants}>
       <Disclosure
         as="nav"
         className="absolute top-0 h-16 w-full border-b border-b-card-main bg-gradient-to-r from-card-main/70 via-card-main/50 to-card-main/60 saturate-100 backdrop-blur-2xl"
@@ -28,17 +31,19 @@ const LayoutNav = () => {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
-                    <Image
-                      className="h-10  object-contain"
-                      src="/images/logo.png"
-                      alt="MagickML Logo"
-                      width={64}
-                      height={64}
-                    />
+                    <Link href="/">
+                      <Image
+                        className="h-10  object-contain"
+                        src="/images/logo.png"
+                        alt="MagickML Logo"
+                        width={64}
+                        height={64}
+                      />
+                    </Link>
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-8">
-                      {navigation.map((item) => (
+                      {navItems.map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
@@ -64,7 +69,7 @@ const LayoutNav = () => {
                   </div>
                 </div>
                 {status === "loading" && (
-                  <div className="flex items-center">
+                  <div className="hidden md:flex items-center">
                     <span className="loading loading-dots loading-md mr-2 text-white" />
                   </div>
                 )}
@@ -104,7 +109,7 @@ const LayoutNav = () => {
                                   <button
                                     onClick={() => {
                                       if (item.name === "Sign out") {
-                                        signOut({ redirect: false });
+                                        signOut();
                                       }
                                     }}
                                     className={clsx(
@@ -139,9 +144,9 @@ const LayoutNav = () => {
               </div>
             </div>
 
-            <Disclosure.Panel className="md:hidden">
+            <Disclosure.Panel className="z-50 md:hidden">
               <div className="flex flex-col space-y-1 bg-gradient-to-r from-card-main/70 via-card-main/50 to-card-main/60 px-2 pb-3 pt-2 saturate-150 backdrop-blur-2xl sm:px-3">
-                {navigation.map((item) => (
+                {navItems.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as={Link}
@@ -160,39 +165,45 @@ const LayoutNav = () => {
                   </Disclosure.Button>
                 ))}
               </div>
-              <div className="border-t-card-main bg-gradient-to-r from-card-main/70 via-card-main/50 to-card-main/60 pb-3 pt-4 saturate-200 backdrop-blur-2xl">
-                <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">
-                    <Image
-                      className="h-10 w-10 rounded-full"
-                      src={user?.user?.image ?? "/images/logo.png"}
-                      alt=""
-                      width={40}
-                      height={40}
-                    />
+              {status === "authenticated" && user && (
+                <div className="border-t-card-main bg-gradient-to-r from-card-main/70 via-card-main/50 to-card-main/60 pb-3 pt-4 saturate-200 backdrop-blur-2xl">
+                  <div className="flex items-center px-5">
+                    <div className="flex-shrink-0">
+                      <Image
+                        className="h-10 w-10 rounded-full"
+                        src={user?.user?.image ?? "/images/logo.png"}
+                        alt="user-image"
+                        width={40}
+                        height={40}
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <div className="text-base font-medium leading-none text-white">
+                        {user?.user.name ?? ""}
+                      </div>
+                      <div className="text-gray-400 text-sm font-medium leading-none">
+                        {user?.user.email ?? ""}
+                      </div>
+                    </div>
                   </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">
-                      {user?.user.name ?? ""}
-                    </div>
-                    <div className="text-gray-400 text-sm font-medium leading-none">
-                      {user?.user.email ?? ""}
-                    </div>
+                  <div className="mt-3 space-y-1 px-2">
+                    {userNavigation.map((item) => (
+                      <Disclosure.Button
+                        key={item.name}
+                        as="button"
+                        onClick={() => {
+                          if (item.name === "Sign out") {
+                            signOut();
+                          }
+                        }}
+                        className="block rounded-md px-3 py-2 font-medium text-white hover:text-secondary-highlight"
+                      >
+                        {item.name}
+                      </Disclosure.Button>
+                    ))}
                   </div>
                 </div>
-                <div className="mt-3 space-y-1 px-2">
-                  {userNavigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="a"
-                      href={item.href}
-                      className="text-gray-400 hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium hover:text-white"
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
-                </div>
-              </div>
+              )}
             </Disclosure.Panel>
           </>
         )}
