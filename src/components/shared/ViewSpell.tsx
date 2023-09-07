@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { Spell } from "~/config/spells";
 
 export default function ViewSpell({ name, description, graph, image }: Spell) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
