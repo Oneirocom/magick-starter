@@ -1,4 +1,4 @@
-import { Layout } from "../components/Layout/Layout";
+import { Layout } from "~/Layout/Layout";
 import { motion } from "framer-motion";
 import FormControl from "../components/shared/FormControl";
 import ImageSettings from "../components/Image/ImageSettings";
