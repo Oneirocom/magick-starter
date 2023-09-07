@@ -7,7 +7,7 @@ import { AnimatePresence } from "framer-motion";
 
 type LayoutProps = {
   children: React.ReactNode;
-  bg: boolean;
+  bg?: boolean;
 };
 
 export const Layout = ({ children, bg = true }: LayoutProps) => {
