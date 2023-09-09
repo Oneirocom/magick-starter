@@ -31,15 +31,15 @@ export const quizRouter = createTRPCRouter({
         model: input.model || "gpt-3.5",
       };
 
-      const result = await fetch("https://magick-dev.herokuapp.com/api", {
+      const result = await fetch(process.env.MAGICK_URL, {
         method: "POST",
         headers: {
-          Authorization: "4add7a98b626c0bccc3a9ed32161de60",
+          Authorization: process.env.QUIZ_AGENT_SECRET || "",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           content: JSON.stringify(content),
-          agentId: "f16663ef-10b4-4e22-a0c1-c6b6dc0e3eef",
+          agentId: process.env.QUIZ_AGENT_ID,
         }),
       });
 
